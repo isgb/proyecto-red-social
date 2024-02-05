@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Header } from './components/layout/general/Header'
 
 function App() {
 
   return (
    <div className='layout'>
-    <h1>poryecto red social React</h1>
+      <Header/>
    </div>
   )
 }
