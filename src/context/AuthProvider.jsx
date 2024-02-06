@@ -8,6 +8,7 @@ export const AuthProvider = ({children}) => {
 
     const [auth, setAuth] =useState({});
     const [counters, setCounters] =useState({});
+    const [loading, setLoading] =useState(true);
 
     useEffect(() => {
         authUser()
@@ -53,6 +54,7 @@ export const AuthProvider = ({children}) => {
         // Setear el estado de auth
         setAuth(data.user)
         setCounters(dataCounters)
+        setLoading(false)
     }
 
     return(
