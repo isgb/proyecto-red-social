@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
+import useAuth from '../../hooks/useAuth';
 
 export const Config = () => {
+
+    const {auth} = useAuth();
 
     const [saved,setSaved] = useState("not_Saved");
 
     const updateUser = (e) => {
         e.preventDefault();
+        
+        console.log(auth)
     }
 
     return (
