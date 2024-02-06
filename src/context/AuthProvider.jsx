@@ -64,7 +64,8 @@ export const AuthProvider = ({children}) => {
                 auth,
                 setAuth,
                 counters,
-                loading
+                loading,
+                setCounters
             }}
         >
             {children}
