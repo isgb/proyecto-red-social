@@ -1,7 +1,8 @@
 import React from "react";
-import avatar from '../../../src/assets/img/user.png'
+import avatar from '../../../src/assets/img/user.png';
 
 export const Feed = () => {
+
   return (
     <>
       <header className="content__header">
