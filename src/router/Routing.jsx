@@ -10,8 +10,8 @@ export const Routing = () => {
         <Routes>
             <Route path='/' element={<PublicLayout/>}>
                 <Route index element={<Login/>}/>
-                <Route path='login' element={<Login/>}/>
-                <Route path='registro' element={<Register/>}/>
+                <Route path='/login' element={<Login/>}/>
+                <Route path='/register' element={<Register/>}/>
             </Route>
         </Routes>
     </BrowserRouter>
