@@ -35,22 +35,32 @@ export const Config = () => {
                 <form className="config-form" onSubmit={updateUser}>
                     <div className="form-group">
                         <label htmlFor="name">Nombre</label>
-                        <input type="text" name="name"  />
+                        <input type="text" name="name"  defaultValue={auth.name}/>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="surname">Apellidos</label>
-                        <input type="text" name="surname"  />
+                        <input type="text" name="surname" defaultValue={auth.surname}/>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="nick">Nick</label>
-                        <input type="text" name="nick"  />
+                        <input type="text" name="nick" defaultValue={auth.nick}/>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="bio">Bio</label>
+                        <textarea name="bio" defaultValue={auth.bio}/>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="email">Correo Electrónico</label>
-                        <input type="email" name="email"  />
+                        <input type="email" name="email" defaultValue={auth.email}/>
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="password" name="password"/>
                     </div>
 
                     <div className="form-group">
@@ -61,11 +71,8 @@ export const Config = () => {
                         <input type="file" name='file0' id='file'/>
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="password">Nombre</label>
-                        <input type="password" name="password"  />
-                    </div>
-
+                    <br/>
+                    
                     <input type="submit" value="Registro" className="btn btn-success" />
                 </form>
             </div>
