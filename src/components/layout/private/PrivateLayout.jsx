@@ -6,28 +6,33 @@ import useAuth from '../../../hooks/useAuth'
 
 export const PrivateLayout = () => {
 
-  const {auth} = useAuth();
+  const { auth, loading } = useAuth();
 
-  return (
-    <>
+  if (loading) {
+    return <h1>Cargando...</h1>
+  } else {
+    return (
+      <>
         {/* LAYOUT */}
 
         {/* Cabecera de navegación */}
-        <Header/>
+        <Header />
 
         {/* Contenido principal */}
         <section className='layout__content'>
-            
-            {
-              auth._id ? 
-                <Outlet/>
+
+          {
+            auth._id ?
+              <Outlet />
               :
-                <Navigate to="/login"/>
-            }
+              <Navigate to="/login" />
+          }
         </section>
 
         {/* Barra Lateral */}
-        <Sidebar/>
-    </>
-  )
+        <Sidebar />
+      </>
+    )
+  }
+
 }
