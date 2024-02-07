@@ -20,6 +20,10 @@ export const Config = () => {
         delete newDataUser.file0;
 
         // Actualizar usuario en la base de datos
+        const request = await fetch(Global.url + "user/update",{
+            method: "PUT",
+            body: JSON.stringify(newDataUser)
+        })
     }
 
     return (
