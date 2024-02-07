@@ -5,12 +5,14 @@ import { SerializeForm } from '../../helpers/SerializeForm';
 
 export const Config =  () => {
 
-    const { auth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const [saved, setSaved] = useState("not_Saved");
 
     const updateUser = async (e) => {
         e.preventDefault();
+
+        const token = localStorage.getItem("token");
 
         // console.log(auth)
         // Recoger datos del formulario
@@ -25,9 +27,50 @@ export const Config =  () => {
             body: JSON.stringify(newDataUser),
             headers:{
                 "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
+                "Authorization": token
             }
-        })
+        });
+
+        const data = await request.json();
+
+        if(data.status == "success" && data.user){
+            delete data.user.password
+            setAuth(data.user)
+            setSaved("saved");
+
+            console.log(auth)
+        }else{
+            setSaved("error");
+        }
+
+        // Subida de imagenes
+        const fileInput = document.querySelector('#file');
+
+        if(data.status == "success" && fileInput.files[0]){
+
+            const formData = new FormData();
+            formData.append('file0', fileInput.files[0]);
+
+            // Peticion para enviar el fichero
+            const uploadRequest = await fetch(Global.url + "user/upload", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "Authorization" : token
+                }
+            });
+            const uploadData = await uploadRequest.json();
+            console.log(uploadData);
+            if(uploadData.status == "success" && uploadData.user){
+
+                delete uploadData.user.password;
+
+                setAuth(uploadData.user);
+                setSaved("saved");
+            }else{
+                setSaved("error")
+            }
+        }
     }
 
     return (
@@ -40,12 +83,12 @@ export const Config =  () => {
 
 
                 {saved == "saved"
-                    ? <strong className="alert alert-success">Usuario registrado correctamente</strong>
+                    ? <strong className="alert alert-success">Usuario actualizado correctamente</strong>
                     : ''
                 }
 
                 {saved == "error"
-                    ? <strong className="alert alert-danger">El usuario no se ha registrado</strong>
+                    ? <strong className="alert alert-danger">El usuario no se ha actualizado</strong>
                     : ''
                 }
 
@@ -96,6 +139,8 @@ export const Config =  () => {
 
                     <input type="submit" value="Registro" className="btn btn-success" />
                 </form>
+
+                <br/>
             </div>
         </>
     )
