@@ -22,7 +22,11 @@ export const Config = () => {
         // Actualizar usuario en la base de datos
         const request = await fetch(Global.url + "user/update",{
             method: "PUT",
-            body: JSON.stringify(newDataUser)
+            body: JSON.stringify(newDataUser),
+            headers:{
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
         })
     }
 
