@@ -3,13 +3,13 @@ import useAuth from '../../hooks/useAuth';
 import { Global } from '../../helpers/Global';
 import { SerializeForm } from '../../helpers/SerializeForm';
 
-export const Config = () => {
+export const Config =  () => {
 
     const { auth } = useAuth();
 
     const [saved, setSaved] = useState("not_Saved");
 
-    const updateUser = (e) => {
+    const updateUser = async (e) => {
         e.preventDefault();
 
         // console.log(auth)
