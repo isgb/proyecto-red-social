@@ -46,7 +46,7 @@ export const People = () => {
       setLoading(false);
 
       // Paginación
-      if (users.length >= data.total) {
+      if (users.length >= (data.total - data.users.length)) {
         setMore(false)
       }
 
@@ -101,7 +101,7 @@ export const People = () => {
                   </div>
                 </div>
                 <div className="post__buttons">
-                  
+
                   {!following.includes(user._id) &&
                     <a href="#" className="post__button post__button--green">
                       Seguir
