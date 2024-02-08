@@ -36,7 +36,7 @@ export const People = () => {
 
       let newUsers = data.users;
 
-      if(users.length >= 1){
+      if (users.length >= 1) {
         newUsers = [...users, ...data.users];
       }
 
@@ -44,7 +44,7 @@ export const People = () => {
       setLoading(false);
 
       // Paginación
-      if(users.length >= data.total){
+      if (users.length >= data.total) {
         setMore(false)
       }
 
@@ -58,7 +58,7 @@ export const People = () => {
 
     getUsers(next);
 
-    console.log(page,users)
+    console.log(page, users)
   }
 
   return (
@@ -79,8 +79,8 @@ export const People = () => {
                   <div className="post__image-user">
 
                     <a href="#" className="post__image-link">
-                      {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="post__user-image" alt="Foto de perfil"/>}
-                      {user.image == "default.png" && <img src={avatar} className="post__user-image" alt="Foto de perfil"/>}
+                      {user.image != "default.png" && <img src={Global.url + "user/avatar/" + user.image} className="post__user-image" alt="Foto de perfil" />}
+                      {user.image == "default.png" && <img src={avatar} className="post__user-image" alt="Foto de perfil" />}
                     </a>
                   </div>
 
@@ -104,9 +104,9 @@ export const People = () => {
                     Seguir
                   </a>
 
-                  {/* <a href="#" className="post__button">
-            Dejar de Seguir
-          </a> */}
+                  <a href="#" className="post__button">
+                    Dejar de Seguir
+                  </a>
 
                 </div>
               </article>
@@ -114,20 +114,19 @@ export const People = () => {
           })
         }
 
-
       </div>
 
-       {loading ? <di>Cargando...</di> : ""}
-        
-       {
-        more && 
+      {loading ? <div>Cargando...</div> : ""}
+
+      {
+        more &&
         <div className="content__container-btn">
           <button className="content__btn-more-post" onClick={nextPage}>
             Ver mas personas
           </button>
         </div>
-       }
-      
+      }
+
       <br/>
 
     </>
