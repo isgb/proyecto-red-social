@@ -37,15 +37,15 @@ export const Following = () => {
 
     const data = await request.json();
 
-    // console.log(data)
+    console.log("VISTA",data)
 
     // Crear un estado para poder listarlos
-    if (data.users && data.status == "success") {
+    if (data.following_users && data.status == "success") {
 
-      let newUsers = data.users;
+      let newUsers = data.following_users;
 
       if (users.length >= 1) {
-        newUsers = [...users, ...data.users];
+        newUsers = [...users, ...data.following_users];
       }
 
       setUsers(newUsers);
@@ -53,7 +53,7 @@ export const Following = () => {
       setLoading(false);
 
       // Paginación
-      if (users.length >= (data.total - data.users.length)) {
+      if (users.length >= (data.total - data.following_users.length)) {
         setMore(false)
       }
 
