@@ -83,15 +83,12 @@ export const People = () => {
     setFollowing([...following,userId])
 
     }
-
   }
-
   
   const unfollow = async (userId) => {
     //peticion al backend para borrar el follow
-    const request = await fetch(Global.url + "follow/save",{
-      method: "POST",
-      body: JSON.stringify({followed: userId}),
+    const request = await fetch(Global.url + "follow/unfollow/" + userId,{
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
@@ -103,10 +100,12 @@ export const People = () => {
     //cuando este todi correcto
     if(data.status == "success"){
 
-    }
-
     // actualiza estado de following, filtrando los datos para 
     // eliminar el antiguo userId que acabo de dejar de seguir
+
+    let filtrar = following.filter(followingUserId => userId !== followingUserId);
+    setFollowing(filtrar);
+    }
 
   }
 
