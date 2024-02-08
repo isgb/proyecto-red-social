@@ -117,8 +117,8 @@ export const People = () => {
 
       </div>
 
-      {loading ? <di>"Cargando..."</di> : ""}
-       
+       {loading ? <di>Cargando...</di> : ""}
+        
        {
         more && 
         <div className="content__container-btn">
@@ -128,7 +128,6 @@ export const People = () => {
         </div>
        }
       
-
       <br/>
 
     </>
