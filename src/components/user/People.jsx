@@ -6,15 +6,20 @@ export const People = () => {
 
   const [users, setUsers] = useState([])
   const [page, setPage] = useState(1)
+  const [more, setMore] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getUsers();
+    getUsers(1);
   }, [])
 
-  const getUsers = async () => {
+  const getUsers = async (nextPage = 1) => {
+
+    //Efecto de carga
+    setLoading(true)
 
     //Peticion para sacar usuarios
-    const request = await fetch(Global.url + 'user/list/' + page, {
+    const request = await fetch(Global.url + 'user/list/' + nextPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -36,8 +41,12 @@ export const People = () => {
       }
 
       setUsers(newUsers);
+      setLoading(false);
 
       // Paginación
+      if(users.length >= data.total){
+        setMore(false)
+      }
 
     }
 
@@ -47,7 +56,7 @@ export const People = () => {
     let next = page + 1;
     setPage(next);
 
-    getUsers();
+    getUsers(next);
 
     console.log(page,users)
   }
@@ -107,12 +116,21 @@ export const People = () => {
 
 
       </div>
-        <br/>
-      <div className="content__container-btn">
-        <button className="content__btn-more-post" onClick={nextPage}>
-          Ver mas personas
-        </button>
-      </div>
+
+      {loading ? <di>"Cargando..."</di> : ""}
+       
+       {
+        more && 
+        <div className="content__container-btn">
+          <button className="content__btn-more-post" onClick={nextPage}>
+            Ver mas personas
+          </button>
+        </div>
+       }
+      
+
+      <br/>
+
     </>
   )
 }
