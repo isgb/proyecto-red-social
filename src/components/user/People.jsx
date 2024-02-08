@@ -63,6 +63,15 @@ export const People = () => {
     // console.log(page, users)
   }
 
+  const follow = () => {
+
+  }
+
+  
+  const unfollow = () => {
+
+  }
+
   return (
     <>
 
@@ -103,14 +112,18 @@ export const People = () => {
                 <div className="post__buttons">
 
                   {!following.includes(user._id) &&
-                    <a href="#" className="post__button post__button--green">
+                    <a href="#" className="post__button post__button--green"
+                    onClick={() => following(user._id)}
+                    >
                       Seguir
                     </a>
                   }
 
                   {
                     following.includes(user._id) &&
-                    <a href="#" className="post__button">
+                    <a href="#" className="post__button"
+                    onClick={() => unfollow(user._id)}
+                    >
                       Dejar de Seguir
                     </a>
                   }
