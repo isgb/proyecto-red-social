@@ -57,7 +57,7 @@ export const People = () => {
   const nextPage = () => {
     let next = page + 1;
     setPage(next);
-    
+
     getUsers(next);
     console.log(following)
     // console.log(page, users)
@@ -100,15 +100,20 @@ export const People = () => {
                     <h4 className="post__content">{user.bio}</h4>
                   </div>
                 </div>
-
                 <div className="post__buttons">
-                  <a href="#" className="post__button post__button--green">
-                    Seguir
-                  </a>
+                  
+                  {!following.includes(user._id) &&
+                    <a href="#" className="post__button post__button--green">
+                      Seguir
+                    </a>
+                  }
 
-                  <a href="#" className="post__button">
-                    Dejar de Seguir
-                  </a>
+                  {
+                    following.includes(user._id) &&
+                    <a href="#" className="post__button">
+                      Dejar de Seguir
+                    </a>
+                  }
 
                 </div>
               </article>
@@ -129,7 +134,7 @@ export const People = () => {
         </div>
       }
 
-      <br/>
+      <br />
 
     </>
   )
