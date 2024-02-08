@@ -54,31 +54,6 @@ export const People = () => {
 
   }
 
-
-  const unfollow = async (userId) => {
-    //peticion al backend para borrar el follow
-    const request = await fetch(Global.url + "follow/unfollow/" + userId, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("token")
-      }
-    })
-
-    const data = await request.json();
-
-    //cuando este todi correcto
-    if (data.status == "success") {
-
-      // actualiza estado de following, filtrando los datos para 
-      // eliminar el antiguo userId que acabo de dejar de seguir
-
-      let filterFollowings = following.filter(followingUserId => userId !== followingUserId);
-      setFollowing(filterFollowings);
-    }
-
-  }
-
   return (
     <>
 
@@ -86,14 +61,14 @@ export const People = () => {
         <h1 className="content__title">Gente</h1>
       </header>
 
-      <UserList users={users} 
-                getUsers={getUsers}
-                following={following}
-                setFollowing={setFollowing}
-                page={page}
-                setPage={setPage}
-                more={more}
-                loading={loading}
+      <UserList users={users}
+        getUsers={getUsers}
+        following={following}
+        setFollowing={setFollowing}
+        page={page}
+        setPage={setPage}
+        more={more}
+        loading={loading}
       />
 
 

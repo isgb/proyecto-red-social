@@ -3,19 +3,19 @@ import useAuth from '../../hooks/useAuth'
 import avatar from '../../assets/img/user.png'
 import { Global } from '../../helpers/Global'
 
-export const UserList = ({ users, getUsers, following, 
-                           setFollowing, page, setPage, more, loading }) => {
+export const UserList = ({ users, getUsers, following,
+    setFollowing, page, setPage, more, loading }) => {
 
     const { auth } = useAuth();
 
     const nextPage = () => {
         let next = page + 1;
         setPage(next);
-    
+
         getUsers(next);
         console.log(following)
         // console.log(page, users)
-      }
+    }
 
     const follow = async (userId) => {
         //peticion al backend para guardar el follow
@@ -42,26 +42,26 @@ export const UserList = ({ users, getUsers, following,
     const unfollow = async (userId) => {
         //peticion al backend para borrar el follow
         const request = await fetch(Global.url + "follow/unfollow/" + userId, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
-          }
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": localStorage.getItem("token")
+            }
         })
-    
+
         const data = await request.json();
-    
+
         //cuando este todi correcto
         if (data.status == "success") {
-    
-          // actualiza estado de following, filtrando los datos para 
-          // eliminar el antiguo userId que acabo de dejar de seguir
-    
-          let filterFollowings = following.filter(followingUserId => userId !== followingUserId);
-          setFollowing(filterFollowings);
+
+            // actualiza estado de following, filtrando los datos para 
+            // eliminar el antiguo userId que acabo de dejar de seguir
+
+            let filterFollowings = following.filter(followingUserId => userId !== followingUserId);
+            setFollowing(filterFollowings);
         }
-    
-      }
+
+    }
 
     return (
         <>
