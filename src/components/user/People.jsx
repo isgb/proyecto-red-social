@@ -7,6 +7,7 @@ export const People = () => {
   const [users, setUsers] = useState([])
   const [page, setPage] = useState(1)
   const [more, setMore] = useState(true)
+  const [following, setFollowing] = useState()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -41,6 +42,7 @@ export const People = () => {
       }
 
       setUsers(newUsers);
+      setFollowing(data.user_following);
       setLoading(false);
 
       // Paginación
@@ -55,10 +57,10 @@ export const People = () => {
   const nextPage = () => {
     let next = page + 1;
     setPage(next);
-
+    
     getUsers(next);
-
-    console.log(page, users)
+    console.log(following)
+    // console.log(page, users)
   }
 
   return (
