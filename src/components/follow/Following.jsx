@@ -45,9 +45,9 @@ export const Following = () => {
       cleanUsers = [...cleanUsers, follow.followed]
     });
 
-    data.users = cleanUsers;
+    data.following_users = cleanUsers;
 
-    console.log(data.users)
+    console.log(cleanUsers)
 
     // Crear un estado para poder listarlos
     if (data.following_users && data.status == "success") {
