@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Global } from '../../helpers/Global'
-import { UserList } from '../user/UserList'
+import { UserList } from '../user//UserList'
+import { useParams } from 'react-router-dom'
 
 export const Followers = () => {
 
@@ -9,6 +10,10 @@ export const Followers = () => {
   const [more, setMore] = useState(true)
   const [following, setFollowing] = useState()
   const [loading, setLoading] = useState(true)
+
+  const params = useParams();
+
+  const userId = params.userId;
 
   useEffect(() => {
     getUsers(1);
@@ -19,8 +24,10 @@ export const Followers = () => {
     //Efecto de carga
     setLoading(true)
 
+    // Sacar userId de la url
+
     //Peticion para sacar usuarios
-    const request = await fetch(Global.url + 'user/list/' + nextPage, {
+    const request = await fetch(Global.url + 'follow/followers/' + userId + "/" + nextPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -30,23 +37,33 @@ export const Followers = () => {
 
     const data = await request.json();
 
-    // console.log(data)
+    console.log("VISTA",data)
+
+    let cleanUsers = [];
+    // Recorrer y limpiar follows para quedarme con followed
+    data.following_users.forEach((follow) => {
+      cleanUsers = [...cleanUsers, follow.followed]
+    });
+
+    data.following_users = cleanUsers;
+
+    console.log(cleanUsers)
 
     // Crear un estado para poder listarlos
-    if (data.users && data.status == "success") {
+    if (data.following_users && data.status == "success") {
 
-      let newUsers = data.users;
+      let newUsers = data.following_users;
 
       if (users.length >= 1) {
-        newUsers = [...users, ...data.users];
+        newUsers = [...users, ...data.following_users];
       }
 
       setUsers(newUsers);
-      setFollowing(data.user_following);
+      setFollowing(data.user_follow_me);
       setLoading(false);
 
       // Paginación
-      if (users.length >= (data.total - data.users.length)) {
+      if (users.length >= (data.total_following - data.following_users.length)) {
         setMore(false)
       }
 
@@ -58,7 +75,7 @@ export const Followers = () => {
     <>
 
       <header className="content__header">
-        <h1 className="content__title">Gente</h1>
+        <h1 className="content__title">Seguidores de NOMBRE USUARIO</h1>
       </header>
 
       <UserList users={users}
