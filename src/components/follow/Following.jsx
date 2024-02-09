@@ -37,15 +37,17 @@ export const Following = () => {
 
     const data = await request.json();
 
-    console.log("VISTA",data)
+    console.log("VISTA",data.following_users)
 
     let cleanUsers = [];
     // Recorrer y limpiar follows para quedarme con followed
     data.following_users.forEach((follow) => {
       cleanUsers = [...cleanUsers, follow.followed]
     });
+
     data.users = cleanUsers;
-    console.log("ARRAR",data.users);
+
+    console.log(data.users)
 
     // Crear un estado para poder listarlos
     if (data.following_users && data.status == "success") {
