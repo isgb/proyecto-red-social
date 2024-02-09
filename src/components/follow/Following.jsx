@@ -37,7 +37,7 @@ export const Following = () => {
 
     const data = await request.json();
 
-    console.log("VISTA",data.following_users)
+    console.log("VISTA",data)
 
     let cleanUsers = [];
     // Recorrer y limpiar follows para quedarme con followed
@@ -63,7 +63,7 @@ export const Following = () => {
       setLoading(false);
 
       // Paginación
-      if (users.length >= (data.total - data.following_users.length)) {
+      if (users.length >= (data.total_following - data.following_users.length)) {
         setMore(false)
       }
 
